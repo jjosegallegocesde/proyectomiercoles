@@ -73,6 +73,56 @@ class RegistroControlador extends BaseController {
 
 	}
 
+	public function eliminar($idEliminar){
+
+		//1. Crear un objeto del modelo(Para poder utilizar el modelo)
+		$modeloPersona= new ModeloPersona();
+
+		//2. ejecutar la función delete() del modelo
+		try{
+			$modeloPersona->where('id',$idEliminar)->delete();
+			echo("se ha elimiando el registro con exito");
+
+		}catch(\Exception $e){
+			echo($e->getMessage());
+		}
+
+	}
+
+	public function editar($idEditar){
+
+		//1.Recibiendo datos desde la vista
+		$nombre=$this->request->getPost("nombreEditar");
+		$descripcion=$this->request->getPost("descEditar");
+
+		//2.Organizar los datos de envio a la base datos en un arreglo asociativo
+		$datosEnvio=array(
+			"nombre"=>$nombre,
+			"descripcion"=>$descripcion
+		);
+
+		//3. Crear objeto del modelo
+		$modeloPersona= new ModeloPersona();
+
+		//4. Edite los datos con la función update()
+		try{
+
+			$modeloPersona->update($idEditar,$datosEnvio);
+			echo("Usuaro editado con exito");
+
+		}catch(\Exception $e){
+
+			echo($e->getMessage());
+
+		}
+
+
+	}
+
+
+
+
+
 	//--------------------------------------------------------------------
 
 }
