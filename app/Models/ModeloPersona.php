@@ -7,6 +7,6 @@ class ModeloPersona extends Model {
     protected $table='usuarios';
     protected $primaryKey='id';
 
-    protected $allowedFields = array('nombre','edad','cedula','poblacion','descripcion');
+    protected $allowedFields = array('nombre','edad','cedula','poblacion','descripcion','foto');
 
 }

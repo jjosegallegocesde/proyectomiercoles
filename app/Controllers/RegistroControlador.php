@@ -19,17 +19,19 @@ class RegistroControlador extends BaseController {
 		$cedula=$this->request->getPost("cedulaUsuario");
 		$poblacion=$this->request->getPost("poblacionUsuario");
 		$descripcion=$this->request->getPost("descripcion");
+		$foto=$this->request->getPost("foto");
+		
 
 		//2.Organizar los datos de envio a la base datos en un arreglo asociativo
 		$datosEnvio=array(
-
 			"nombre"=>$nombre,
 			"edad"=>$edad,
 			"cedula"=>$cedula,
 			"poblacion"=>$poblacion,
-			"descripcion"=>$descripcion
-
+			"descripcion"=>$descripcion,
+			"foto"=>$foto
 		);
+		
 
 		//3. Sacar una copia de la clase (instanciar la clase) o crear un objeto
 		// de la clase ModeloPersona
@@ -38,8 +40,9 @@ class RegistroControlador extends BaseController {
 		//4. Ejecuto el metodo insert() del objeto cerado en el punto 3
 		try{
 			$modeloPersona->insert($datosEnvio);
-			echo("Registro creado con Éxito");
 
+			$mensaje="Usuario registrado con éxito";
+			return redirect()->to(base_url("public/usuarios"))->with('mensaje',$mensaje);
 		}catch(\Exception $e){
 
 			echo($e->getMessage());
